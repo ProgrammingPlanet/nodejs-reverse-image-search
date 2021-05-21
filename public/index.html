@@ -27,11 +27,11 @@
           
           <div class="container">
               <div class="row">
-                  <div v-for="engine in searchEngines" class="col-md-3 col-lg-2 col-sm-6 col-xs-6 my-2">
+                  <div v-for="search in searchs" class="col-md-3 col-lg-2 col-sm-6 col-xs-6 my-2">
                       <div class="py-3 text-center bg-light">
-                          <img :src="`img/${engine.icon}`" :alt="engine.name">
-                          <h6 class="my-3">{{engine.name}}</h6>
-                          <button class="btn btn-sm btn-primary" @click="search(`${engine.name}`)">
+                          <img :src="`img/${search.icon}`" :alt="search.icon">
+                          <h6 class="my-3">{{search.name}}</h6>
+                          <button class="btn btn-sm btn-primary" @click="redirect(`${search.url}`)">
                               Show Result
                           </button>
                       </div>
