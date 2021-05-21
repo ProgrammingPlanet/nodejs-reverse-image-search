@@ -6,7 +6,9 @@
     <link rel="icon" type="image/png" href="https://cdn.glitch.com/b3dc13dc-038b-4afc-a29f-1c17370e2f8d%2Ffavicon.ico?v=1621579678050" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />
-    <script src="js/vue-v3.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/js/vue-v3.js"></script>
     <title>Reverse Image Search</title>
     <style>
       html,body {
@@ -21,19 +23,43 @@
     </style>
   </head>
   <body>
-    <div class="container h-100" id="app">
-      <div class="row h-100 justify-content-center align-items-center">
-        <div class="col-12 border border-primary p-3 my-2">
-          
+
+    <div class="container px-0 shadow">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light px-2 py-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Search Engine</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse text-center" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/img/">image</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    </div>
+
+    <div class="container mt-2 bg-light shadow" id="app">
+      
+      <div class="row">
+        <div class="col-12 p-3 my-2">
+    
           <div class="container">
               <div class="row">
-                  <div v-for="search in searchs" class="col-md-3 col-lg-2 col-sm-6 col-xs-6 my-2">
-                      <div class="py-3 text-center bg-light">
-                          <img :src="`img/${search.icon}`" :alt="search.icon">
-                          <h6 class="my-3">{{search.name}}</h6>
-                          <button class="btn btn-sm btn-primary" @click="redirect(`${search.url}`)">
-                              Show Result
-                          </button>
+                  <div v-for="search in searchs" class="col-md-3 col-lg-3 col-sm-6 col-xs-6 my-2">
+                      <div class="py-3 text-center bg-white shadow">
+                          <img class="img-fluid p-4" :src="`img/${search.icon}`" :alt="search.icon">
+                          <a href="/img/" class="btn btn-sm btn-primary" @click="redirect(`${search.url}`)">
+                              {{search.name}}
+                          </a>
                       </div>
                   </div>
               </div>
@@ -43,7 +69,7 @@
       </div>
     </div>
 
-    <script src="js/app.js"></script>
+    <script src="/js/app.js"></script>
   </body>
 
   <script></script>
