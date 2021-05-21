@@ -4,7 +4,7 @@ const app = Vue.createApp({
             searchs: [
                 {
                     name: 'Reverse Image Search',
-                    icon: 'img-search.svg',
+                    icon: 'img-search.png',
                     url: 'img'
                 }
               ]
