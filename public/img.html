@@ -70,25 +70,29 @@
                     <input type="text" v-model="img.url" class="form-control" id="imgurl" placeholder="Paste image url">
                 </div>
                 <div class="text-center my-4">
-                    <button class="btn btn-primary btn-lg px-5" @click="upload">Search</button>
+                    <button class="btn btn-primary btn-lg px-5" @click="upload" :disabled="processing">
+                        <div class="spinner-border spinner-border-sm text-warning" role="status" v-if="processing">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <span v-else>Search</span>
+                    </button>
                 </div>
             </div>
             
-            <div class="col-12 border border-primary p-3 my-2" v-else>
+            <div class="col-12 border bg-light shadow p-3 my-2" v-else>
                 <h6 class="text-end">
                     <button class="btn btn-sm" @click="() => {showUpload = !showUpload}">
                         upload another image
                     </button>
                 </h6>
                 <div class="text-center my-5">
-                    
                     <h5>Find similar images in different search engines.</h5>
                 </div>
                 <div class="container">
                     <div class="row">
                         <div v-for="engine in searchEngines" class="col-md-3 col-lg-2 col-sm-6 col-xs-6 my-2">
-                            <div class="py-3 text-center bg-light">
-                                <img :src="`img/${engine.icon}`" :alt="engine.name">
+                            <div class="py-3 text-center bg-white shadow">
+                                <img :src="`/img/${engine.icon}`" :alt="engine.name">
                                 <h6 class="my-3">{{engine.name}}</h6>
                                 <button class="btn btn-sm btn-primary" @click="search(`${engine.name}`)">
                                     Show Result
