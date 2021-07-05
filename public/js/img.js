@@ -1,6 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
+            processing: false,
             IMGBB_API_KEY: 'abfe6c7d869516a107e6660fa2e3dbe2',
             showUpload: true,
             img: {
@@ -69,13 +70,30 @@ const app = Vue.createApp({
                 alert('invalid url or file')
             }
         },
-        upload(){
+        async upload(){
             if(valid_url(this.img.url))
             {
                 this.showUpload = false
+                /*
+                this.processing = true
+                fetch(this.img.url).then(r => {
+                    if(r.headers.get('Content-Type').split('/')[0] === 'image')
+                    {
+                        this.showUpload = false
+                    }
+                    else{
+                        alert('url does not contain an image')
+                    }
+                    this.processing = false
+                }).catch(e => {
+                    alert('error occured')
+                    this.processing = false
+                })      
+                */          
             }
             else if(this.img.file)
             {
+                this.processing = true
                 let self = this
                 var fd = new FormData()
                 fd.append('image', this.img.file)
@@ -85,9 +103,7 @@ const app = Vue.createApp({
                 fetch('https://api.imgbb.com/1/upload',{
                     method: 'POST',
                     body: fd
-                })
-                .then(response => response.json())
-                .then(resp => {                     //success
+                }).then(resp => resp.json()).then(resp => {
                     if(resp.success){
                         self.img.url = resp.data.url
                         this.showUpload = false
@@ -95,8 +111,11 @@ const app = Vue.createApp({
                     else{
                         alert('error uploading image. Try Again.')
                     }
+                    this.processing = false
+                }).catch(e => {
+                    alert(e)
+                    this.processing = false
                 })
-                .catch(error => console.log(error)) //error
             }
             else
             {
